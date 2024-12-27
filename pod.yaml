@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    # labels unlike other dictionaries we can create our own keys and values
+    env: demo
+spec:
+  containers:
+  - name : nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80

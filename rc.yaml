@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rc
+  labels:
+    partOf: rs
+    env: good
+spec:
+  # inside template create complete pod template from your pod yaml
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        env: demo
+    spec:
+      containers:
+      - name : nginx-container
+        image: nginx
+        ports:
+        - containerPort: 80
+  replicas: 3
+  selector:
+    matchLabels:
+      partOf: rs
