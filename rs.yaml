@@ -1,17 +1,17 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: nginx-rc
+  name: nginx-depl
   labels:
     partOf: rs
-    env: good
+    env: demo
 spec:
   # inside template create complete pod template from your pod yaml
   template:
     metadata:
       name: nginx-pod
       labels:
-        env: demo
+        partOf: rs
     spec:
       containers:
       - name : nginx-container
