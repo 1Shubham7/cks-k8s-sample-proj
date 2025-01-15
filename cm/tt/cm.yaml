@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cm-one
+data:
+  FIRSTNAME: Shubham
+  LASTNAME: Singh

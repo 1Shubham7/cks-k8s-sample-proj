@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: readiness-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: readiness-depl
+  template:
+    metadata:
+      labels:
+        app: readiness-depl
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 15
+

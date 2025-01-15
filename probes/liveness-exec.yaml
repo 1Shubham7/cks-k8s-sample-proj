@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: registry.k8s.io/busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5 # wait for 5 seconds before the first probe
+      periodSeconds: 5 # conduct probe every 5 seconds
+      timeoutSeconds: 3 # timeout for reponse would be 3 sec
+      failureThreshold: 4 # after 4 consecutive unsuccessful probes the pod will be marked as unhealthy
+      successThreshold: 1 # sucessful after 1 sucessful probe
