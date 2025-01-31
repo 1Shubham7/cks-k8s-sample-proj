@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: backend
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2025-01-29T23:04:48Z"
+  labels:
+    app: backend
+  name: backend
+  namespace: default
+  resourceVersion: "1547"
+  uid: e24f5e95-969e-4494-9ba2-b0dc51b7aa72
+spec:
+  clusterIP: 10.96.208.90
+  clusterIPs:
+  - 10.96.208.90
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 80-80
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: backend
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
