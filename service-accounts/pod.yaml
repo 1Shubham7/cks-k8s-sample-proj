@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: busybox
+  name: nginx
+spec:
+  serviceAccountName: sa
+  containers:
+  - image: nginx
+    name: nginx
